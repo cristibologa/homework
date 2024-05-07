@@ -1,117 +1,238 @@
-# Aceasta este sarcina pentru lecția despre conceptele avansate ale programării orientate pe obiecte în Python, cum ar fi super() și self, getter/setter și property, privatizarea și tipurile de metode.
+# Aceasta este sarcina pentru lecția despre clase și conceptele de bază ale programării orientate pe obiecte în Python.
 
-from sigmoid_check.python_odyssey.lesson_14.lesson_14 import Lesson14
+from sigmoid_check.python_odyssey.lesson_13.lesson_13 import Lesson13
 
-# Această temă pentru acasă necesită instalarea librăriei `sigmoid_check` cu versiunea cel puțin 0.0.7
+# Această temă pentru acasă necesită instalarea librăriei `sigmoid_check` cu versiunea cel puțin 0.0.5
 # Pentru a instala această librărie, rulați următorul cod în terminal:
-# pip install sigmoid_check==0.0.7
+# pip install sigmoid_check==0.0.5
 
 # VERIFICATION PROCESS
-session = Lesson14()
+session = Lesson13()
 # VERIFICATION PROCESS
 
 """
 ISTORIA DIN SPATE:
-O companie de tehnologie, TechSolutions, are nevoie de ajutorul nostru pentru a îmbunătăți gestionarea software-ului lor intern. 
-Ei doresc să optimizeze modul în care tratează datele utilizatorilor și setările de sistem, 
-respectând principiile OOP avansate pentru a asigura securitatea și modularitatea codului.
+Această temă va fi puțin mai diferită decât deobicei, cei de la DARWIN au apelat la serviciile noastre ca să-i ajutăm să organizeze produsele acestora.
+Procesul lor de vindere a unui produs durează foarte mult din cauza la sistemul lor învechit de structurare a produselor, iar clienții sunt nemulțumiți.
+
+Din păcate noi suntem ocupați cu procesele de organizare a Python Odyssey Camp și nu reușim la timp să realizăm sistemul nou. Dar în schimb voi puteți, aveți toate cunoștințele necesare.
+Și plus la asta noi avem încredere că o să vă desurcați și o să rezolvați problema în timp util.
 """
 
 """
-Pentru început vrem să asigurăm 3 tipuri de utilizatori în baza de date a companiei noastre.
-Tipurile de utilizatori sunt:
-1. Utilizator default - utilizatorul obișnuit care nu va avea careva drepturi de acces și va putea să utilizeze sistemul intern într-un mod limitat
-2. Utilizator manager - utilizatorul care va avea drepturi de acces mai mari decât utilizatorul default și va putea să modifice setările de sistem, 
-                        însă va avea restricții în ceea ce privește modificarea datelor utilizatorilor, 
-                        fiind capabil doar să citească informația și nu să o modifice
-3. Utilizator admin - utilizatorul care va avea toate drepturile de acces și va putea să modifice atât setările de sistem, cât și datele utilizatorilor
+Pentru început o să ne ocupăm de dirijarea și managementul produselor.
+1. Avem nevoie să creezi o clasă `Produs`, aceasta trebuie să accepte 3 parametri: numele, pretul, anul_producerii
+Cu ajutorul acestei clase trebuie să fiu capabil să creeze câte obiecte doresc cu orice configurație a numelui, prețului și anul_producerii
 
-Iar din cauza faptului că nu dorim să replicăm aceleași metode de inițializare a utilizatorilor pentru fiecare tip de utilizator,
-vrem să creăm o clasă de bază care să conțină metodele comune pentru toți utilizatorii și să moștenească aceste metode către clasele specifice tipurilor de utilizatori.
-
-Ce trebuie să faci:
-1. Creează o clasă `Utilizator` care să conțină un atribut public `nume` și un atribut protejat `_nivel_acces` cu valoarea implicită "Default".
-    Clasa `Utilizator` trebuie să conțină metoda `afiseaza_nivel_acces` care să returneze string-ul "*nume-utilizator* are nivelul de acces *nivel-acces*.".
-    De asemenea, clasa `Utilizator` trebuie să conțină metoda `utilizeaza_sistem` care să returneze string-ul "*nume-utilizator* poate utiliza funcții de bază ale sistemului.".
-
-2. Creează o clasă `UtilizatorManager` care să moștenească clasa `Utilizator` și să aibă atributul protejat `_nivel_acces` cu valoarea "Manager".
-    Clasa `UtilizatorManager` trebuie să conțină metoda `modifica_setari` care să returneze string-ul "*nume-utilizator* poate modifica setările sistemului.".
-    De asemenea, clasa `UtilizatorManager` trebuie să conțină metoda `citeste_date_utilizator` care să returneze string-ul "*nume-utilizator* poate citi datele utilizatorilor.".
-
-3. Creează o clasă `UtilizatorAdmin` care să moștenească clasa `Utilizator` și să aibă atributul protejat `_nivel_acces` cu valoarea "Admin".
-    Clasa `UtilizatorAdmin` trebuie să conțină metoda `modifica_setari` care să returneze string-ul "*nume-utilizator* poate modifica setările sistemului.".
-    De asemenea, clasa `UtilizatorAdmin` trebuie să conțină metoda `modifica_date_utilizator` care să returneze string-ul "*nume-utilizator* poate modifica datele utilizatorilor.".
+Exemplu utilizare:
+telefon = Produs("Iphone", 15000, 2020) # Voi putea crea un obiect utilizând anumiți parametri de intrare
+print(telefon.numele)                   # Voi putea accesa numele obiectului creat
+print(telefon.pretul)                   # Voi putea accesa pretul obiectului creat
+print(telefon.anul_producerii)          # Voi putea accesa anul producerii obiectului creat
 """
 
 # CODUL TĂU VINE MAI JOS:
-class Utilizator:
-    pass
 
-class UtilizatorManager( ):
-    pass
 
-class UtilizatorAdmin( ):
+class Produs:
+    def __init__(self, numele, pretul, anul_producerii):
+        self.numele = numele
+        self.pretul = pretul
+        self.anul_producerii = anul_producerii
+
+
+# CODUL TĂU VINE MAI SUS:
+
+
+# VERIFICATION PROCESS
+print(session.check_task_1(Produs))
+# VERIFICATION PROCESS
+
+"""
+DARWIN de asemenea a mai menționat că unele produse au nevoie de o descriere mai detaliată a parametrilor și informațiilor pe care le dețin.
+2. Avem nevoie de trei clase noi care să moștenească clasa `Produs`:
+"""
+
+"""
+2.1Prima clasă se numește `Telefon` aceasta va moșteni clasa `Produs` și va avea doi parametri în plus numit `baterie_mAh` și `memorie_GB`
+
+De asemenea aceasta va avea o metodă numită `upgrade_memory` care va primi un parametru `new_memory` și va actualiza valoarea memoriei telefonului.
+Totodată aceasta va avea o metodă numită `upgrade_battery` care va primi un parametru `new_battery` și va actualiza valoarea bateriei telefonului.
+"""
+
+# CODUL TĂU VINE MAI JOS:
+
+
+class Telefon(Produs):
+    def __init__(self, numele, pretul, anul_producerii, baterie_mAh, memorie_GB):
+        super().__init__(numele, pretul, anul_producerii)
+        self.baterie_mAh = baterie_mAh
+        self.memorie_GB = memorie_GB
+
+    def upgrade_memory(self, new_memory):
+        self.memorie_GB = new_memory
+
+    def upgrade_battery(self, new_battery):
+        self.baterie_mAh = new_battery
+
+# CODUL TĂU VINE MAI SUS:
+
+
+# VERIFICATION PROCESS
+print(session.check_task_2(Telefon, Produs))
+# VERIFICATION PROCESS
+
+"""
+2.2 A doua clasă se numește `Laptop` aceasta va moșteni clasa `Produs` și va avea doi parametri în plus numit `sistem_de_operare` și `procesor`
+
+De asemenea aceasta va avea o metodă numită `upgrade_processor` care va primi un parametru `new_processor` și va actualiza valoarea procesorului laptopului.
+Totodată aceasta va avea o metodă numită `upgrade_os` care va primi un parametru `new_os` și va actualiza valoarea sistemului de operare al laptopului.
+"""
+
+# CODUL TĂU VINE MAI JOS:
+
+
+class Laptop(Produs):
+    def __init__(self, numele, pretul, anul_producerii, sistem_de_operare, procesor):
+        super().__init__(numele, pretul, anul_producerii)
+        self.sistem_de_operare = sistem_de_operare
+        self.procesor = procesor
+
+    def upgrade_processor(self, new_processor):
+        self.procesor = new_processor
+
+    def upgrade_os(self, new_os):
+        self.sistem_de_operare = new_os
+# CODUL TĂU VINE MAI SUS:
+
+
+# VERIFICATION PROCESS
+print(session.check_task_3(Laptop, Produs))
+# VERIFICATION PROCESS
+
+"""
+2.3 A treia clasă se numește `trotineta` aceasta va moșteni clasa `Produs` și va avea doi parametri în plus numit `viteza_maxima` și `autonomie_km`
+
+De asemenea aceasta va avea o metodă numită `upgrade_speed` care va primi un parametru `new_speed` și va actualiza valoarea vitezei maxime a trotinetei.
+Totodată aceasta va avea o metodă numită `upgrade_autonomy` care va primi un parametru `new_autonomy` și va actualiza valoarea autonomiei trotinetei.
+"""
+
+# CODUL TĂU VINE MAI JOS:
+
+
+class Trotineta(Produs):
+    def __init__(self, numele, pretul, anul_producerii, viteza_maxima, autonomie_km):
+        super().__init__(numele, pretul, anul_producerii)
+        self.viteza_maxima = viteza_maxima
+        self.autonomie_km = autonomie_km
+
+    def upgrade_speed(self, new_speed):
+        self.viteza_maxima = new_speed
+
+    def upgrade_autonomy(self, new_autonomy):
+        self.autonomie_km = new_autonomy
+# CODUL TĂU VINE MAI SUS:
+
+
+# VERIFICATION PROCESS
+print(session.check_task_4(Trotineta, Produs))
+# VERIFICATION PROCESS
+
+"""
+3 DARWIN a mai lăsat o mică notiță după ei, au menționat că mulți cumpărători sunt interesați de produsele apple și adesea acestea le combină între ele.
+
+Avem nevoie de o clasă nouă care să se numească `AppleProduct` care va moșteni clasa `Produs` și va avea un parametru în plus numit `culoare` și `produs_conectat` 
+parametrul `produs_conectat` va avea valoarea "nimic" la crearea unui produs astfel încât nu va fi necesar de menționat la crearea unui obiect nou
+De asemenea va avea o metodă numită `combine_products` care va primi un parametru `product` ce va reprezenta un alt obiect de tip `AppleProduct` care va fi salvat în parametrul `produs_conectat`
+Există o singură condiție, produsul conectat trebuie să fie de tip `AppleProduct` iar culoarea acestuia trebuie să fie aceeași cu a produsului curent.
+
+Exemplu utilizare:
+iphone = AppleProduct("Iphone", 15000, 2020, "negru")
+airpods = AppleProduct("Airpods", 1000, 2021, "alb")
+iphone.combine_products(airpods) # În acest caz se va returna textul "Produsul nu poate fi conectat deoarece culorile nu coincid"
+
+iphone = AppleProduct("Iphone", 15000, 2020, "negru")
+airpods = AppleProduct("Airpods", 1000, 2021, "negru")
+iphone.combine_products(airpods) # În acest caz se va returna textul "Produsul a fost conectat cu succes" și dacă se va printa iphone.produs_conectat se va returna obiectul airpods
+print(iphone.produs_conectat.numele) # Va returna numele produsului conectat
+"""
+
+# CODUL TĂU VINE MAI JOS:
+
+
+class AppleProduct(Produs):
+    def __init__(self, numele, pretul, anul_producerii, culoare):
+        super().__init__(numele, pretul, anul_producerii)
+        self.culoare = culoare
+        self.produs_conectat = "nimic"
+
+    def combine_products(self, product):
+        if isinstance(product, AppleProduct) and product.culoare == self.culoare:
+            self.produs_conectat = product
+        else:
+            return "Produsul nu poate fi conectat deoarece culorile nu coincid"
+
+# CODUL TĂU VINE MAI SUS:
+
+
+# VERIFICATION PROCESS
+print(session.check_task_5(AppleProduct, Produs))
+# VERIFICATION PROCESS
+
+"""
+4. DARWIN și-a mai adus aminte de o chestie, și-au dat seama că cei de la Google tot au nevoie de posibilitatea de a conecta produsele între ele.
+
+Avem nevoie de o clasă nouă care să se numească `GoogleProduct` care va moșteni clasa `AppleProduct` posibilitățile la ambele sunt aceleași, dar va fi nevoie de o singură schimbare.
+Produsul conectat trebuie să fie de tip `GoogleProduct` iar culoarea acestuia poate să fie diferită de a produsului curent.
+Asta ar însemna că singurul element care va necesita modificări este metoda `combine_products` care va trebui să accepte orice tip de obiect de tip `GoogleProduct`
+
+Exemplu utilizare:
+pixel = GoogleProduct("Pixel", 10000, 2020, "negru")
+home = GoogleProduct("Home", 500, 2021, "alb")
+pixel.combine_products(home) # În acest caz se va returna textul "Produsul a fost conectat cu succes" și dacă se va printa pixel.produs_conectat se va returna obiectul home
+print(pixel.produs_conectat.numele) # Va returna numele produsului conectat
+
+"""
+
+# CODUL TĂU VINE MAI JOS:
+
+
+class GoogleProduct():
     pass
 # CODUL TĂU VINE MAI SUS:
 
 
 # VERIFICATION PROCESS
-print(session.check_task_1(Utilizator, UtilizatorManager, UtilizatorAdmin))
+print(session.check_task_6(GoogleProduct, AppleProduct))
 # VERIFICATION PROCESS
 
 """
-Acum că am creat clasele de utilizatori, mai avem nevoie de însăși sistemul la care acești utilizatori vor avea acces.
-Sistemul va conține o clasă `Sistem` care va conține o listă de utilizatori și metode pentru a adăuga utilizatori noi, a afișa utilizatorii existenți și a verifica nivelul de acces al unui utilizator.
-La sistem va avea acces doar Utilizatorii Admin așa că trebuie să ne asigurăm că aceștia vor avea metode pentru a adăuga, a modificare și a șterge datele private ale sistemului.
+5. Cei de la DARWIN chiar sunt uituci, și-au adus aminte peste 5 zile că vor avea nevoie și de o modalitate prin care să vândă produsele.
 
-Ce trebuie să faci:
-1. Pentru această sarcină vom crea o copie a clasei `Utilizator` de mai sus, deoarece vom avea nevoie de aceeași structură pentru a adăuga utilizatorii în sistem.
-   Creează o clasă `user` care să conțină un atribut privat `_nume` și un atribut protejat `__nivel_acces` cu valoarea implicită "Default".
-   Acum avem nevoie de un getter și un setter pentru atributul `_nume` și `__nivel_acces` pentru a putea modifica aceste valori în afara clasei.
+Avem nevoie de o clasă nouă pentru aceasta, ea se va numi `Magazin` și va conține doar 2 metode, `vinde_produs` și `returneaza_produs`
 
-2. Creează o clasă `Sistem` care va conține un atribut privat `__utilizatori` inițializat cu un dicționar gol în care cheile vor fi id-ul și valorile utilizatorii.
-    Clasa `Sistem` trebuie să conțină metoda `adauga_utilizator` care va primi un obiect de tip `Utilizator` și va adăuga utilizatorul la dicționar împreună cu un nou id.
-    De asemenea, clasa `Sistem` trebuie să conțină metoda `afiseaza_utilizatori` care va returna o listă cu numele utilizatorilor existenți.
-    Clasa `Sistem` trebuie să conțină metoda `verifica_nivel_acces` care va primi numele unui utilizator și va returna nivelul de acces al utilizatorului respectiv.
-    Clasa `Sistem` trebuie să conțină și metoda `modifica_name_user` care va primi id-ul utilizatorului și noul nume al utilizatorului și va modifica numele utilizatorului respectiv.
-    Clasa `Sistem` trebuie să conțină și metoda `sterge_utilizator` care va primi id-ul utilizatorului și va șterge utilizatorul respectiv.
-    Clasa `Sistem` trebuie să conțină și metoda `modifica_nivel_acces` care va primi id-ul utilizatorului și noul nivel de acces al utilizatorului și va modifica nivelul de acces al utilizatorului respectiv.
+Metoda `vinde_produs` va primi un parametru `produs` care va reprezenta un obiect de tip `Produs` și va returna textul "Produsul *numele produsului* a fost vândut cu succes"
+Metoda `returneaza_produs` va primi un parametru `produs` care va reprezenta un obiect de tip `Produs` și va returna textul "Produsul *numele produsului* a fost returnat cu succes"
+
+Exemplu utilizare:
+iphone = AppleProduct("Iphone", 15000, 2020, "negru")
+print(magazin.vinde_produs(iphone)) # Va returna textul "Produsul Iphone a fost vândut cu succes"
+print(magazin.returneaza_produs(iphone)) # Va returna textul "Produsul Iphone a fost returnat cu succes"
 """
 
 # CODUL TĂU VINE MAI JOS:
-class user:
-    pass
-    
- 
-class Sistem:
-    pass
 
-# CODUL TĂU VINE MAI SUS:
 
-# VERIFICATION PROCESS
-print(session.check_task_2(user, Sistem))
-# VERIFICATION PROCESS
+class Magazin:
+    def vinde_produs(produs):
+        return f"Produsul {produs.numele} a fost vândut cu succes"
 
-# Task 3: Privatizarea
-"""
-Iar pe sfârșite a rămas ulimul element al sistemului nostru, vom aveae nevoie de o simulare a unei aplicații care va permite interacțiunea cu întregul sistem.
+    def returneaza_produs(produs):
+        return f"Produsul {produs.numele} produsului* a fost returnat cu succes"
+    # CODUL TĂU VINE MAI SUS:
 
-Ce trebuie să faci:
-1. Creează o clasă `TechSolutionsApp` care va conține o valoare a clasei `versiune_applicatie` cu valoarea implicită "1.0".
-    Această clasă va avea nevoie de 3 metode, fiecare dintre acestea va fi utilizată pentru a simula interacțiunea cu sistemul nostru.
-    De asemenea clasa va primi ca argument la inițializare o valoare ce va reprezenta versiunea aplicatiei care va fi stocată în atributul `self.versiune_aplicatie`.
-
-    Metoda `market_view` va fi o metodă statică care nu va avea acces la self sau cls și va returna string-ul "Vizualizare piață".
-    Metoda `delogat_view` va fi o metodă de clasă care va avea acces la cls și va returna string-ul "Versiunea aplicației este *versiune-aplicatie*" utilizând atributul clasei.
-    Metoda `account_view` va fi o metodă de instanță care va avea acces la self și va returna string-ul "Vizualizare aplicație user *versiune-aplicatie*" utilizând atributul instanței.
-"""
-
-# CODUL TĂU VINE MAI JOS:
-class TechSolutionsApp:
-    pass
-# CODUL TĂU VINE MAI SUS:
-
-# VERIFICATION PROCESS
-print(session.check_task_3(TechSolutionsApp))
+    # VERIFICATION PROCESS
+print(session.check_task_7(Magazin, Produs))
 print(session.get_completion_percentage())
+
 # VERIFICATION PROCESS
